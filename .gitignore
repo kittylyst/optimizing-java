@@ -1,3 +1,13 @@
+.DS_Store
+*.pdf
+/nbproject/
+build.xml
+manifest.mf
+/build/
+/dist/
+*.class
+
+# Maven
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -7,3 +17,9 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
+# Netbeans files
+
+/nbproject/private/
+/lib/
+
