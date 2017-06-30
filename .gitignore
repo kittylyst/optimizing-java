@@ -6,6 +6,7 @@ manifest.mf
 /build/
 /dist/
 *.class
+*.log
 
 # Maven
 target/
