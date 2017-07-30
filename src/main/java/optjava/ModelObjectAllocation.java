@@ -8,11 +8,11 @@ package optjava;
  */
 // tag::OBJECT_ALLOC[]
 public class ModelObjectAllocation implements Runnable {
-    private final int[][] allocated;
+    private final byte[][] allocated;
     private final int lifeTime;
 
     public ModelObjectAllocation(final int x, final int y, final int liveFor) {
-        allocated = new int[x][y];
+        allocated = new byte[x][y];
         lifeTime = liveFor;
     }
     

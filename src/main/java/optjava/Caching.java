@@ -10,16 +10,16 @@ public class Caching {
             touchEveryLine();
             touchEveryItem();
         }
-        System.out.println("Item     Line");
+        System.out.println("Line     Item");
         for (int i = 0; i < 100; i++) {
             long t0 = System.nanoTime();
             touchEveryLine();
             long t1 = System.nanoTime();
             touchEveryItem();
             long t2 = System.nanoTime();
-            long elEvery = t1 - t0;
-            long elLine = t2 - t1;
-            System.out.println(elEvery + " " + elLine);
+            long elEveryLine = t1 - t0;
+            long elEveryItem = t2 - t1;
+            System.out.println(elEveryLine + " " + elEveryItem);
         }
     }
 
