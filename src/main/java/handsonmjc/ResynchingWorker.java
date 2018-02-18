@@ -1,6 +1,7 @@
 package handsonmjc;
 
 import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CyclicBarrier;
 
 /**
@@ -8,7 +9,6 @@ import java.util.concurrent.CyclicBarrier;
  * @author kittylyst
  */
 public class ResynchingWorker implements Runnable {
-
     private final CyclicBarrier barrier;
 
     public ResynchingWorker(CyclicBarrier b) {

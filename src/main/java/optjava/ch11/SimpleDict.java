@@ -80,6 +80,7 @@ public class SimpleDict implements Map<String, String> {
 
     @Override
     public boolean containsKey(Object key) {
+        if (key == null) return false;
         return getNode(key) != null;
     }
 
@@ -92,12 +93,12 @@ public class SimpleDict implements Map<String, String> {
         if ((tab = table) != null && (n = tab.length) > 0
                 && (first = tab[(n - 1) & hash]) != null) {
             if (first.hash == hash && // always check first node
-                    ((k = first.key) == key || (key != null && key.equals(k))))
+                    ((k = first.key) == key || key.equals(k)))
                 return first;
             if ((e = first.next) != null) {
                 do {
                     if (e.hash == hash
-                            && ((k = e.key) == key || (key != null && key.equals(k))))
+                            && ((k = e.key) == key || key.equals(k)))
                         return e;
                 } while ((e = e.next) != null);
             }
@@ -165,14 +166,6 @@ public class SimpleDict implements Map<String, String> {
         int hash = key.hashCode();
         int i = indexFor(hash, table.length);
 
-//        Node head = table[i];
-//        if (head == null)
-//            return null;
-//        
-//        if (head.hash == hash
-//                && (head.key == key || key.equals(head.key))) {
-//            table[i] = head.next;
-//        }
         Node last = table[i];
         for (Node e = table[i]; e != null; e = e.next) {
             String k;
