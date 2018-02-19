@@ -1,7 +1,6 @@
 package handsonmjc;
 
 
-import handsonmjc.ResynchingWorker;
 import java.util.concurrent.CyclicBarrier;
 
 
