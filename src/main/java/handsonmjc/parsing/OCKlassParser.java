@@ -203,7 +203,7 @@ public final class OCKlassParser {
     private OCKlass klass() {
         final OCKlass out = new OCKlass(className());
         for (CPMethod cpm : methods) {
-            final OCMethod ocm = new OCMethod(className(), cpm.signature, cpm.nameAndType, cpm.buf);
+            final OCMethod ocm = new OCMethod(className(), cpm.signature, cpm.nameAndType, cpm.flags, cpm.buf);
             out.addDefinedMethod(ocm);
         }
 
@@ -349,10 +349,10 @@ public final class OCKlassParser {
 
         for (int idx = 0; idx < mCount; idx++) {
             int mFlags = ((int) clzBytes[current++] << 8) + (int) clzBytes[current++];
-            int name_idx = ((int) clzBytes[current++] << 8) + (int) clzBytes[current++];
-            int desc_idx = ((int) clzBytes[current++] << 8) + (int) clzBytes[current++];
-            int attrs_count = ((int) clzBytes[current++] << 8) + (int) clzBytes[current++];
-            CPMethod m = new CPMethod(mFlags, name_idx, desc_idx, attrs_count);
+            int nameIndex = ((int) clzBytes[current++] << 8) + (int) clzBytes[current++];
+            int descIndex = ((int) clzBytes[current++] << 8) + (int) clzBytes[current++];
+            int attrsCount = ((int) clzBytes[current++] << 8) + (int) clzBytes[current++];
+            CPMethod m = new CPMethod(mFlags, nameIndex, descIndex, attrsCount);
 
             for (int aidx = 0; aidx < m.getAttrs().length; aidx++) {
                 m.setAttr(aidx, parseAttribute(m));

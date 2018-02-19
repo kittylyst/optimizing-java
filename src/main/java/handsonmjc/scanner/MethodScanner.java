@@ -12,9 +12,11 @@ import java.util.Set;
 public class MethodScanner implements Runnable {
 
     private final String className;
+    private final Path path;
 
     public MethodScanner(String name, Path p, Set<String> output) {
         className = name;
+        path = p;
         // Save variables
     }
 
@@ -22,7 +24,7 @@ public class MethodScanner implements Runnable {
         // Get file bytes from disc
 
         try {
-            // Scan it
+            // Scan the bytes & construct a class object
             OCKlass klass = OCKlassParser.of(null, className);
 
             // Find all native methods using the parsed klass object & write them to the output set
@@ -36,4 +38,10 @@ public class MethodScanner implements Runnable {
 
     }
 
+    @Override
+    public String toString() {
+        return "MethodScanner{" + "className=" + className + ", path=" + path + '}';
+    }
+
+    
 }

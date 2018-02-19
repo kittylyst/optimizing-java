@@ -63,7 +63,12 @@ public final class PackageScanner {
             for (Path p : stream) {
                 final String className = baseDir.relativize(p).toString().replace(".class", "");
                 final MethodScanner scanner = new MethodScanner(className, p, nativeMethods);
-                
+                try {
+                     System.out.println(scanner);
+                    downstream.put(scanner);
+                } catch (InterruptedException ex) {
+                    // WHAT DO WE DO HERE ????
+                }
             }
         }
         //

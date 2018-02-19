@@ -10,16 +10,14 @@ public class OCMethod {
     private final String nameAndType;
     private final byte[] bytecode;
     private final String signature;
+    private final int flags;
     private int numParams = -1;
 
-//    private static final byte[] JUST_RETURN = {RETURN.B()};
-//    
-//    public static final OCMethod OBJ_INIT = new OCMethod("java/lang/Object", "()V", "<init>:()V", JUST_RETURN);
-    
-    public OCMethod(final String klassName, final String sig, final String nameType, final byte[] buf) {
+    public OCMethod(final String klassName, final String sig, final String nameType, final int fls, final byte[] buf) {
         signature = sig;
         nameAndType = nameType;
         bytecode = buf;
+        flags = fls;
         className = klassName;
     }
 
@@ -35,6 +33,10 @@ public class OCMethod {
         return signature;
     }
 
+    public int getFlags() {
+        return flags;
+    }
+    
     public int numParams() {
         if (numParams > -1)
             return numParams;
