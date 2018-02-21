@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  *
@@ -15,11 +17,10 @@ public final class PackageScanner {
 
     private static final String USAGE_STRING = "Usage: PackageScanner <classes root dir> <package to scan>";
 
-    private final SortedSet<String> nativeMethods = new TreeSet<>();
+    private final CopyOnWriteArraySet<String> nativeMethods = new CopyOnWriteArraySet<>();
 
-    // FIXME
-    private final BlockingQueue<MethodScanner> downstream = null;
-    
+    private final BlockingQueue<MethodScanner> downstream = new LinkedBlockingQueue<>();
+
     private final String basePath;
     private final String packageName;
 
@@ -43,7 +44,7 @@ public final class PackageScanner {
         for (String method : nativeMethods) {
             System.out.println(method);
         }
-        System.out.println("Total native methods in package "+ packageName +": " + nativeMethods.size());
+        System.out.println("Total native methods in package " + packageName + ": " + nativeMethods.size());
     }
 
     private static void usage() {
@@ -64,19 +65,22 @@ public final class PackageScanner {
                 final String className = baseDir.relativize(p).toString().replace(".class", "");
                 final MethodScanner scanner = new MethodScanner(className, p, nativeMethods);
                 try {
-                     System.out.println(scanner);
+                    System.out.println(scanner);
                     downstream.put(scanner);
                 } catch (InterruptedException ex) {
-                    // WHAT DO WE DO HERE ????
+                    System.err.println("Interrupted");
+                    System.exit(1);
                 }
             }
         }
         //
         // KICK OFF SCANNER MANAGER
-        // 
+        //
+        final ScannerManager mgr = new ScannerManager(downstream);
+        mgr.run();
     }
 
-    public SortedSet<String> getNativeMethods() {
+    public CopyOnWriteArraySet<String> getNativeMethods() {
         return nativeMethods;
     }
 

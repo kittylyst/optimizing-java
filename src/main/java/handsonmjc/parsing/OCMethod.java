@@ -72,4 +72,10 @@ public class OCMethod {
         return bytecode;
     }
 
+    @Override
+    public String toString() {
+        return "OCMethod{" + "className=" + className + ", nameAndType=" + nameAndType + ", bytecode=" + bytecode + ", signature=" + signature + ", flags=" + flags + ", numParams=" + numParams + '}';
+    }
+
+    
 }

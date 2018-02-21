@@ -115,6 +115,7 @@ public final class OCKlassParser {
             switch (tag) {
                 case UTF8: // String prefixed by a uint16 indicating the number of bytes in the encoded string which immediately follows
                     int len = ((int) clzBytes[current++] << 8) + (int) clzBytes[current++];
+//                    System.err.println("Current: "+ current +" ; "+ clzBytes.length +" ; Len: "+ len);
                     String str = new String(clzBytes, current, len, Charset.forName("UTF8"));
                     item = CPEntry.of(i, tag, str);
                     current += len;
