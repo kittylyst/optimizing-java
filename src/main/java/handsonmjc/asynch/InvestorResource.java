@@ -20,6 +20,7 @@ public class InvestorResource {
 
     public static final String RESOURCE_PATH = "investors";
 
+    // Injected
     private final InvestorService investorService;
 
     public InvestorResource(InvestorService investorService) {
@@ -32,6 +33,16 @@ public class InvestorResource {
         InvestorDto investor = investorService.createInvestor(investorInformationRequest);
         // Persist DTO here...
 //    log.debug("Investor created {}", investor);
+        Response result = Response.ok().entity(investor).build();
+
+        return result;
+    }
+
+    @POST
+    public Response getInvestorStatus(long applicationId,
+            @Context HttpServletRequest httpServletRequest) throws Exception {
+        InvestorDto investor = investorService.lookup(applicationId);
+
         Response result = Response.ok().entity(investor).build();
 
         return result;
