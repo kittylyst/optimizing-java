@@ -20,7 +20,9 @@ buildNumber.properties
 .mvn/timing.properties
 
 # Netbeans files
-
 /nbproject/private/
+nbactions.xml
 /lib/
 
+# IntelliJ
+.idea/
