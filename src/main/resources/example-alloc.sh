@@ -4,7 +4,7 @@
 
 CP=./target/optimizing-java-1.0.0-SNAPSHOT.jar
 
-GC_LOG_OPTS="-Xloggc:gc-alloc-`date +%s`.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+PrintTenuringDistribution"
+GC_LOG_OPTS="-Xloggc:gc-alloc-`date +%s`.log -XX:+PrintCompilation -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+PrintTenuringDistribution"
 
 MEM_OPTS="-Xmx1G"
 
