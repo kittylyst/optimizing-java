@@ -9,10 +9,16 @@ public final class OverLocking {
     public static void main(String[] args) {
         SecureRandom sr = new SecureRandom();
         Runnable r = () -> {
+            sr.setSeed(System.nanoTime());
+            final int initialSleep = Math.abs(sr.nextInt() % 10_000);
+            try {
+                Thread.sleep(initialSleep);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             synchronized (lock) {
-                sr.setSeed(System.nanoTime());
-                final int sleep = Math.abs(sr.nextInt() % 10000);
                 try {
+                    final int sleep = Math.abs(sr.nextInt() % 2_000);
                     Thread.sleep(sleep);
                     System.out.println("Thread: "+ Thread.currentThread().getName() +" finished");
                 } catch (InterruptedException e) {
@@ -30,6 +36,7 @@ public final class OverLocking {
         for (int i = 0; i < t.length; i++) {
             try {
                 t[i].join();
+                System.out.println("Thread: "+ t[i].getName() +" joined");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -1,7 +1,6 @@
 package optjava;
 
 /**
- *
  * @author ben
  */
 public class CounterMain {
@@ -16,15 +15,18 @@ public class CounterMain {
                 c.increment();
             }
         };
-        
+
         Thread t1 = new Thread(r);
         Thread t2 = new Thread(r);
+        long start = System.currentTimeMillis();
         t1.start();
         t2.start();
         t1.join();
         t2.join();
+        long fin = System.currentTimeMillis();
         int diff = c.increment() - (2 * REPS + 1);
-        System.out.println("Diff: "+ diff);
+        System.out.println("Diff: " + diff);
+        System.out.println("Elapsed: " + (fin - start));
     }
 
 }

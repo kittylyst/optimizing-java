@@ -3,7 +3,6 @@ package optjava;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.concurrent.CompletableFuture;
 
 public final class SHA256Finder {
 
@@ -24,12 +23,11 @@ public final class SHA256Finder {
         final StringBuilder sb = new StringBuilder();
         for (int j = 0; j < length; j++) {
             // Select a random char ch >= 32 && ch < 127
-            char c = (char)(32 + Math.random()*96);
+            char c = (char)(32 + Math.random() * 96);
             sb.append(c);
         }
         return sb.toString();
     }
-
 
 //    public static void main(String[] args) throws Exception {
 //        SHA256Finder s = new SHA256Finder();
@@ -37,22 +35,28 @@ public final class SHA256Finder {
 //    }
 
     public static void main(String[] args) throws Exception {
+        Runnable r = () -> {
+            SHA256Finder s = new SHA256Finder();
+            s.findMatcher(1024, 22);
+        };
+
+        Thread[] t = new Thread[8];
         final long start = System.currentTimeMillis();
-        CompletableFuture<Void>[] allF = new CompletableFuture[8];
-        for (int i = 0; i < allF.length; i++) {
-            Runnable r = () -> {
-                SHA256Finder s = new SHA256Finder();
-                s.findMatcher(1024, 20);
-            };
-            allF[i] = CompletableFuture.runAsync(r);
+        for (int i = 0; i < t.length; i++) {
+            t[i] = new Thread(r);
+            t[i].setName("Miner-"+ i);
+            t[i].start();
         }
-        CompletableFuture<?> first = CompletableFuture.anyOf(allF);
-        // Enforce blocking, result is irrelevant as Void anyway
-        first.get();
+        for (int i = 0; i < t.length; i++) {
+            try {
+                t[i].join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         final long end = System.currentTimeMillis();
         System.out.println("Done: "+ (end - start));
     }
-
 
     void findMatcher(int length, int target) {
         System.out.println("Length: " + length + " ; target: " + target);
