@@ -1,9 +1,9 @@
-package optjava;
+package optjava.counters;
 
 import sun.misc.Unsafe;
 import java.lang.reflect.Field;
 
-public class AtomicCounter {
+public final class AtomicCounter {
 
     private static final Unsafe unsafe; // = Unsafe.getUnsafe();
     private static final long valueOffset;
@@ -27,7 +27,7 @@ public class AtomicCounter {
      *
      * @return the updated value
      */
-    public final int increment() {
+    public int increment() {
         return unsafe.getAndAddInt(this, valueOffset, 1) + 1;
     }
 
@@ -36,7 +36,7 @@ public class AtomicCounter {
      *
      * @return the current value
      */
-    public final int get() {
+    public int get() {
         return value;
     }
 
@@ -45,7 +45,7 @@ public class AtomicCounter {
      *
      * @param newValue the new value
      */
-    public final void set(int newValue) {
+    public void set(int newValue) {
         value = newValue;
     }
 
