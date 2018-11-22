@@ -3,7 +3,7 @@ package optjava.counters;
 import sun.misc.Unsafe;
 import java.lang.reflect.Field;
 
-public final class AtomicCounter {
+public final class AtomicCounter implements Counter {
 
     private static final Unsafe unsafe; // = Unsafe.getUnsafe();
     private static final long valueOffset;

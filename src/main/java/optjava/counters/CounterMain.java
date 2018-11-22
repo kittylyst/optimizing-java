@@ -8,7 +8,7 @@ public class CounterMain {
     public static final int REPS = 10_000_000;
 
     public static void main(String[] args) throws InterruptedException {
-        final Counter c = new UnprotectedCounter(); // init to 0
+        final Counter c = new AtomicCounter(); // init to 0
 
         Runnable r = () -> {
             for (int i = 0; i < REPS; i++) {
