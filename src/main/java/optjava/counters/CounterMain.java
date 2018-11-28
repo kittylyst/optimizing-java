@@ -11,9 +11,8 @@ public class CounterMain {
         final Counter c = new AtomicCounter(); // init to 0
 
         Runnable r = () -> {
-            for (int i = 0; i < REPS; i++) {
+            for (int i = 0; i < REPS; i++)
                 c.increment();
-            }
         };
 
         Thread t1 = new Thread(r);

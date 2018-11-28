@@ -3,6 +3,7 @@ package optjava;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class SHA256Finder {
 
@@ -29,33 +30,9 @@ public final class SHA256Finder {
         return sb.toString();
     }
 
-//    public static void main(String[] args) throws Exception {
-//        SHA256Finder s = new SHA256Finder();
-//        s.findMatcher(1024, 20);
-//    }
-
     public static void main(String[] args) throws Exception {
-        Runnable r = () -> {
-            SHA256Finder s = new SHA256Finder();
-            s.findMatcher(1024, 22);
-        };
-
-        Thread[] t = new Thread[8];
-        final long start = System.currentTimeMillis();
-        for (int i = 0; i < t.length; i++) {
-            t[i] = new Thread(r);
-            t[i].setName("Miner-"+ i);
-            t[i].start();
-        }
-        for (int i = 0; i < t.length; i++) {
-            try {
-                t[i].join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        final long end = System.currentTimeMillis();
-        System.out.println("Done: "+ (end - start));
+        SHA256Finder s = new SHA256Finder();
+        s.findMatcher(1024, 18);
     }
 
     void findMatcher(int length, int target) {
@@ -67,17 +44,16 @@ public final class SHA256Finder {
         FOREVER:
         while (true) {
             candidate = makeRandomString(length);
-            if (belowThreshold(candidate, target)) {
-                break FOREVER;
-            }
             if (++attempts % 100_000 == 0) {
                 System.out.print(".");
             }
+            if (belowThreshold(candidate, target)) {
+                System.out.println();
+                System.out.println("Length: " + length + " took attempts: " + attempts +" to find a "+ target +" prefix");
+                System.out.println("Winner: " + candidate);
+                System.out.println("Winning hash: " + sha256Hash(candidate));
+            }
         }
-        System.out.println();
-        System.out.println("Length: " + length + " took attempts: " + attempts +" to find a "+ target +" prefix");
-        System.out.println("Winner: " + candidate);
-        System.out.println("Winning hash: " + sha256Hash(candidate));
     }
 
     public boolean belowThreshold(final String s, final int numBits) {

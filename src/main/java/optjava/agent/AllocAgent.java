@@ -8,7 +8,6 @@ import java.lang.instrument.Instrumentation;
  */
 // tag::ALLOC_RECORDER[]
 public class AllocAgent {
-
     public static void premain(String args, Instrumentation instrumentation) {
         AllocRewriter transformer = new AllocRewriter();
         instrumentation.addTransformer(transformer);
