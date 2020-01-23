@@ -11,7 +11,7 @@ public final class StringHash {
         for (int i = 1; i < 2_000; i++) {
             timeHashing(i, 'x');
         }
-        System.identityHashCode(this);
+//        System.identityHashCode(this);
     }
 
 
@@ -24,7 +24,7 @@ public final class StringHash {
         final long now = System.nanoTime();
         final int hash = s.hashCode();
         final long duration = System.nanoTime() - now;
-        System.err.println("Length: " + length + " took: " + duration + " ns");
-//        System.out.println(length + ","+ duration +","+ hash);
+//        System.err.println("Length: " + length + " took: " + duration + " ns");
+        System.out.println(length + ","+ duration +","+ hash);
     }
 }
