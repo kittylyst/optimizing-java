@@ -2,6 +2,7 @@ package optjava.counters;
 
 import sun.misc.Unsafe;
 import java.lang.reflect.Field;
+//import java.util.concurrent.atomic.AtomicInteger;
 
 public final class AtomicCounter implements Counter {
 
@@ -16,8 +17,7 @@ public final class AtomicCounter implements Counter {
             Field f = Unsafe.class.getDeclaredField("theUnsafe");
             f.setAccessible(true);
             unsafe = (Unsafe) f.get(null);
-            valueOffset = unsafe.objectFieldOffset
-                (AtomicCounter.class.getDeclaredField("value"));
+            valueOffset = unsafe.objectFieldOffset(AtomicCounter.class.getDeclaredField("value"));
             System.out.println("Offset: "+ valueOffset);
         } catch (Exception ex) { throw new Error(ex); }
     }
@@ -28,7 +28,7 @@ public final class AtomicCounter implements Counter {
      * @return the updated value
      */
     public int increment() {
-        return unsafe.getAndAddInt(this, valueOffset, 1) + 1;
+        return 1 + unsafe.getAndAddInt(this, valueOffset, 1);
     }
 
     /**

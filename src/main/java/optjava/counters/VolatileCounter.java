@@ -6,14 +6,14 @@ package optjava.counters;
  */
 public final class VolatileCounter implements Counter {
 
-    private volatile int i = 0;
+    private volatile int value = 0;
 
     public int increment() {
-        return i = i + 1;
+        return value = value + 1;
     }
 
     public int get() {
-        return i;
+        return value;
     }
 
 }

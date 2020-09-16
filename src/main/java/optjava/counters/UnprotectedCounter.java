@@ -1,7 +1,5 @@
 package optjava.counters;
 
-import optjava.counters.Counter;
-
 /**
  *
  * @author ben

@@ -8,11 +8,12 @@ public class CounterMain {
     public static final int REPS = 10_000_000;
 
     public static void main(String[] args) throws InterruptedException {
-        final Counter c = new UnprotectedCounter(); // init to 0
+        final Counter c = new UnprotectedCounter();
 
         Runnable r = () -> {
-            for (int i = 0; i < REPS; i++)
+            for (int i = 0; i < REPS; i++) {
                 c.increment();
+            }
         };
 
         Thread t1 = new Thread(r);
@@ -23,7 +24,7 @@ public class CounterMain {
         t1.join();
         t2.join();
         long fin = System.currentTimeMillis();
-        int diff = c.increment() - (2 * REPS + 1);
+        int diff = 2 * REPS - c.get();
         System.out.println("Diff: " + diff);
         System.out.println("Elapsed: " + (fin - start));
     }
