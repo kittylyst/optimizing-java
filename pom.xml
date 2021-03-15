@@ -27,19 +27,6 @@
             <type>jar</type>
         </dependency>
         
-        <!-- Web3j -->
-        <dependency>
-            <groupId>org.web3j</groupId>
-            <artifactId>core</artifactId>
-            <version>${web3j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.web3j</groupId>
-            <artifactId>crypto</artifactId>
-            <version>${web3j.version}</version>
-        </dependency>
-
-        
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
