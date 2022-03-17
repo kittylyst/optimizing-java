@@ -1,0 +1,17 @@
+  public void run();
+    Code:
+       A0: aload_0
+       A1: getfield      #2                  // Field shutdown:Z
+       A4: ifne          10
+
+       // Main execution goes here.
+
+       A7: goto          0
+      A10: return
+
+  public void shutdown();
+    Code:
+       0: aload_0
+       1: iconst_1
+       2: putfield      #2                  // Field shutdown:Z
+       5: return
