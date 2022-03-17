@@ -1,0 +1,47 @@
+       A0: aload_0
+       A1: aload_0
+       A2: getfield      #2                  // Field i:I   : 17
+
+       // A:[17, this]
+
+       ///////////////////////////// Context Switch
+
+       // B:[]
+
+              B0: aload_0
+              B1: aload_0
+              B2: getfield      #2                  // Field i:I : 17
+
+              // B:[17, this]
+
+              B5: iconst_1
+              // B:[1, 17, this]
+
+              B6: iadd
+              // B:[18, this]
+
+              B7: dup_x1
+              // B:[18, this, 18]
+
+              B8: putfield      #2                  // Field i:I : 18
+              // B:[18]
+
+             B11: ireturn
+
+       ///////////////////////////// Context Switch
+
+
+       A5: iconst_1
+       // A:[1, 17, this]
+
+       A6: iadd
+       // A:[18, this]
+
+       A7: dup_x1
+       // A:[18, this, 18]
+
+       A8: putfield      #2                  // Field i:I : 18
+       // B:[18]
+
+      A11: ireturn
+
