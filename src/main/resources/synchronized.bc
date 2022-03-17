@@ -1,0 +1,32 @@
+       A0: aload_0
+       A1: aload_0
+       XXXXXXXXXXXXXXX  monitorenter
+       A2: getfield      #2                  // Field i:I  *** READ 17
+       A5: iconst_1
+       A6: iadd
+       A7: dup_x1
+       /////////////////////////////////////////////  Context Switch
+
+              B0: aload_0
+              B1: aload_0
+              XXXXXXXXXXXXXXX  monitorenter  BLOCK BLOCK BLOCK
+
+       /////////////////////////////////////////////  Context Switch
+
+       A8: putfield      #2                  // Field i:I  *** WRITE 18
+       XXXXXXXXXXXXXXX  monitorexit
+      A11: ireturn
+
+       ///////////////////////////////////////////// Context Switch
+
+
+              XXXXXXXXXXXXXXX  monitorenter
+              B2: getfield      #2                  // Field i:I  *** READ 18
+              B5: iconst_1
+              B6: iadd
+              B7: dup_x1
+              B8: putfield      #2                  // Field i:I  *** WRITE 19
+              XXXXXXXXXXXXXXX  monitorexit
+              B11: ireturn
+
+

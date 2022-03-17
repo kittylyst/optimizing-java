@@ -1,4 +1,4 @@
-package optjava.collections;
+package optjava.maps;
 
 import java.util.*;
 
