@@ -1,4 +1,4 @@
-package optjava.ch11;
+package optjava.maps;
 
 public class DictMain {
 

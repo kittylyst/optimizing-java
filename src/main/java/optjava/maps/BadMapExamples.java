@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class BadMapExamples {
     public static void main(String[] args) {
-        Map<String, String> map = Collections.synchronizedMap(new HashMap<>());
+        Map<String, String> map = new HashMap<>();
         int SIZE = 100;
 
         Runnable r1 = () -> {
